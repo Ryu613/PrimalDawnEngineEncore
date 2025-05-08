@@ -1,15 +1,29 @@
 {
-    "version":10,
-    "cmakeMinimumRequired":{
-        "major":4,
-        "minor":0,
-        "patch":2
+    "version": 10,
+    "cmakeMinimumRequired": {
+        "major": 4,
+        "minor": 0,
+        "patch": 2
     },
     "configurePresets": [
         {
             "name": "default",
             "generator": "Ninja",
-            "binaryDir": "${sourceDir}/build/default",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+                "CMAKE_C_COMPILER": "$env{C_COMPILER_PATH}/gcc.exe",
+                "CMAKE_CXX_COMPILER": "$env{CXX_COMPILER_PATH}/g++.exe"
+            }
+        },
+        {
+            "name": "debug",
+            "inherits": "default",
+            "hidden":true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
         }
     ]
 }
